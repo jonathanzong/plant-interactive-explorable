@@ -5,6 +5,15 @@ html {
   box-sizing: inherit;
 }
 
+path, line {
+  stroke: #fff;
+}
+
+svg {
+  width: 100%;
+  height: 600px;
+}
+
 html, body {
   .container-fluid {
     height: 100%;

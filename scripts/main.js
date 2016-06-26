@@ -24,7 +24,6 @@ $(function () {
       })
       .setPin($(rows[i]).find('.pinnable').get(0))
       .addTo(controller);
-    console.log('hi');
 
   }
 

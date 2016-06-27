@@ -1,4 +1,15 @@
 /**
+ * do this
+ * https://www.paulirish.com/2012/box-sizing-border-box-ftw/
+ */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/**
  * Reset some basic elements
  */
 body, h1, h2, h3, h4, h5, h6,

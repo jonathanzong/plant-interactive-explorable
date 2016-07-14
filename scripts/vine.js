@@ -13,6 +13,11 @@ $(document).ready(function() {
     var maxDepth = 10;
     var leftRightProbability = 1; // 1 means always branch right, 0.5 means equal each direction
 
+    var lineGen = d3.svg.line()
+      .x(function(d){return d.x;})
+      .y(function(d){return d.y;})
+      .interpolate("basis"); 
+
     // Tree creation functions
     function branch(b) {
       var end = endPt(b), daR, newB;
@@ -66,28 +71,29 @@ $(document).ready(function() {
     function y2(d) {return endPt(d).y;}
 
     function create() {
+      // debugger;
       d3.select(svg)
-        .selectAll('line')
-        .data(branches)
-        .enter()
-        .append('line')
-        .attr('x1', x1)
-        .attr('y1', y1)
-        .attr('x2', x2)
-        .attr('y2', y2)
-        .style('stroke-width', function(d) {return parseInt(maxDepth + 1 - d.d) + 'px';})
-        .attr('id', function(d) {return 'id-'+d.i;});
+        .append('path')
+        .attr("d", lineGen(branches))
+        // .attr('x1', x1)
+        // .attr('y1', y1)
+        // .attr('x2', x2)
+        // .attr('y2', y2)
+        // .style('stroke-width', function(d) {return parseInt(maxDepth + 1 - d.d) + 'px';})
+        .style('stroke-width', 2)
+        .style('fill', 'none')
+        // .attr('id', function(d) {return 'id-'+d.i;});
     }
 
     function update() {
       d3.select(svg)
-        .selectAll('line')
-        .data(branches)
+        .selectAll('path')
         .transition()
-        .attr('x1', x1)
-        .attr('y1', y1)
-        .attr('x2', x2)
-        .attr('y2', y2);
+        .attr("d", lineGen(branches))
+        // .attr('x1', x1)
+        // .attr('y1', y1)
+        // .attr('x2', x2)
+        // .attr('y2', y2);
     }
 
     return {

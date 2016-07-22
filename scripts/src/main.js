@@ -1,35 +1,47 @@
-$(function () {
-  // init
+$(document).ready(function() {
+  // vine stuff
+  var container = $(".vine-sketch-container");
+  var vine = new VineRenderer({
+    container: container,
+    pointCount: 100
+  });
+
+  // svg stuff
+  var path = Snap("#vine-path");
+  var pathLength = Snap.path.getTotalLength(path);
+  var offset = path.getPointAtLength(pathLength);
+
+  // animation stuff
+  var maxTime = pathLength / vine.ropeLength;
+  var tweenState = { time: 0 };
+  
+  var tween = TweenMax.to(tweenState, 3, {time: maxTime, onUpdate: onUpdate});
+
+  function onUpdate() {
+    vine.updatePoints(function(points) {
+      for (var i = 0; i < vine.pointCount; i++) {
+        var pos = (vine.ropeLength / vine.pointCount * (i * tweenState.time));
+        if (pos < pathLength) {
+          var point = path.getPointAtLength(pathLength - pos);
+          TweenLite.to(points[i], 0, {x: vine.width / 2 + (point.x - offset.x), y: vine.height - (point.y - offset.y)});
+        }
+      }
+    });
+    vine.render();
+  }
+
+  // scrollmagic
   var controller = new ScrollMagic.Controller({
     globalSceneOptions: {
       triggerHook: 'onLeave'
     }
   });
-
-  // get all rows
-  var rows = document.querySelectorAll(".row");
-
-  // create scene for every slide
-  for (var i=0; i<rows.length; i++) {
-    // new ScrollMagic.Scene({
-    //     triggerElement: rows[i]
-    //   })
-    //   .setPin(rows[i])
-    //   .addTo(controller);
-    //
-
-    new ScrollMagic.Scene({
-        triggerElement: rows[i],
-        duration: $(rows[i]).height()
-      })
-      .setPin($(rows[i]).find('.pinnable').get(0))
-      .addTo(controller);
-
-  }
-
-  $('.pinnable p').hover(function() {
-    $(this).text("THANK YOU");
-  }, function() {
-    $(this).text("HELLO PLEASE HOVER OVER ME");
-  });
+  var firstRow = document.querySelector(".row");
+  var scene = new ScrollMagic.Scene({
+      triggerElement: firstRow,
+      duration: $(firstRow).height()
+    })
+    .setTween(tween)
+    .setPin($(firstRow).find('.pinnable').get(0))
+    .addTo(controller);
 });

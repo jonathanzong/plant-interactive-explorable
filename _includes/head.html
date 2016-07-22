@@ -7,14 +7,20 @@
   <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 
   <link href="https://fonts.googleapis.com/css?family=EB+Garamond|Open+Sans" rel="stylesheet">
-
   <link rel="stylesheet" href="{{ "/css/bootstrap.min.css" | prepend: site.baseurl }}">
   <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
+  
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
 
-  <script src="https://code.jquery.com/jquery-3.0.0.min.js" integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0=" crossorigin="anonymous"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
-  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-  <script src="{{ "/scripts/main.js" | prepend: site.baseurl }}"></script>
-  <script src="{{ "/scripts/vine.js" | prepend: site.baseurl }}"></script>
+  <script src="{{ "/scripts/vendor/jquery-3.1.0.min.js" | prepend: site.baseurl }}"></script>
+  <script src="{{ "/scripts/vendor/ScrollMagic.min.js" | prepend: site.baseurl }}"></script>
+  <script src="{{ "/scripts/vendor/pixi.min.js" | prepend: site.baseurl }}"></script>
+  <script src="{{ "/scripts/vendor/snap.svg-min.js" | prepend: site.baseurl }}"></script>
+  <script src="{{ "/scripts/vendor/TimelineLite.min.js" | prepend: site.baseurl }}"></script>
+  <script src="{{ "/scripts/vendor/TweenLite.min.js" | prepend: site.baseurl }}"></script>
+  
+  <script src="{{ "/scripts/src/main.js" | prepend: site.baseurl }}"></script>
+  <script src="{{ "/scripts/src/VineHelpers.js" | prepend: site.baseurl }}"></script>
+  <script src="{{ "/scripts/src/vine-sketch.js" | prepend: site.baseurl }}"></script>
+  
 </head>

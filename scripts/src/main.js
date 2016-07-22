@@ -23,7 +23,8 @@ $(document).ready(function() {
         var pos = (vine.ropeLength / vine.pointCount * (i * tweenState.time));
         if (pos < pathLength) {
           var point = path.getPointAtLength(pathLength - pos);
-          TweenLite.to(points[i], 0, {x: vine.width / 2 + (point.x - offset.x), y: vine.height - (point.y - offset.y)});
+          points[i].x = vine.width / 2 + (point.x - offset.x);
+          points[i].y = vine.height - (point.y - offset.y);
         }
       }
     });

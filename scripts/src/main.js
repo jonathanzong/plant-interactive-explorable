@@ -1,6 +1,6 @@
 $(document).ready(function() {
   // vine stuff
-  var container = $(".vine-sketch-container");
+  var container = $(".vine-container");
   var vine = new VineRenderer({
     container: container,
     pointCount: 100

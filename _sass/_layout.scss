@@ -30,24 +30,14 @@ html, body {
   background-size: cover;
 }
 
-blockquote {
-  font-family: $pullquote-font-family;
-  color: white;
-  font-size: 3em;
-  margin: $base-font-size 0;
-  padding: 0;
-  border: none;
-}
-
-
-h1 {
-  font-family: $pullquote-font-family;
-  font-size: 1.6em;
-  margin: (1.5 * $base-font-size) 0 $base-font-size 0;
-}
-
 .text-content {
-  z-index: 2;
+  background: -moz-linear-gradient(left,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 50%);
+  background: -webkit-linear-gradient(left,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.3) 50%);
+  background: linear-gradient(to right,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.3) 50%);
+}
+
+.text-content p {
+  max-width: 500px;
 }
 
 .overlay {

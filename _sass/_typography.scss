@@ -1,0 +1,14 @@
+blockquote {
+  font-family: $pullquote-font-family;
+  color: white;
+  font-size: 3em;
+  margin: $base-font-size 0;
+  padding: 0;
+  border: none;
+}
+
+h1 {
+  font-family: $pullquote-font-family;
+  font-size: 1.6em;
+  margin: (1.5 * $base-font-size) 0 $base-font-size 0;
+}

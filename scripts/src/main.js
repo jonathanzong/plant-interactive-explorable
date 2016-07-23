@@ -38,16 +38,19 @@ $(document).ready(function() {
     }
   });
   var firstRow = document.querySelector(".row");
-  var duration = $(firstRow).height();
   var contentScene = new ScrollMagic.Scene({
       triggerElement: firstRow,
-      duration: duration
+      duration: $(firstRow).height()
     })
     .setTween(tween)
     .setPin($(firstRow).find('.pinnable').get(0))
     .addTo(controller);
 
-  $(window).resize(function() {
-    $('.overlay').height($(firstRow).height()); // lol ffs
-  });
+  function resizeHandler() {
+    var rowHeight = $(firstRow).height();
+    $('.overlay').height(rowHeight); // lol ffs
+    $('.text-content').height(rowHeight);
+  }
+  $(window).resize(resizeHandler);
+  $(document).ready(resizeHandler);
 });

@@ -38,11 +38,16 @@ $(document).ready(function() {
     }
   });
   var firstRow = document.querySelector(".row");
-  var scene = new ScrollMagic.Scene({
+  var duration = $(firstRow).height();
+  var contentScene = new ScrollMagic.Scene({
       triggerElement: firstRow,
-      duration: $(firstRow).height()
+      duration: duration
     })
     .setTween(tween)
     .setPin($(firstRow).find('.pinnable').get(0))
     .addTo(controller);
+
+  $(window).resize(function() {
+    $('.overlay').height($(firstRow).height()); // lol ffs
+  });
 });

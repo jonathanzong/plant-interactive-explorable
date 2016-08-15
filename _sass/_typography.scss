@@ -12,3 +12,22 @@ h1 {
   font-size: 1.6em;
   margin: (1.5 * $base-font-size) 0 $base-font-size 0;
 }
+
+.dropcap {
+  float: left;
+
+  font-family: $pullquote-font-family;
+  font-style: italic;
+  font-weight: bold;
+  
+  font-size: 45px;
+  line-height: 30px;
+  
+  padding-top: 9px;
+  padding-right: 21px;
+  padding-left: 12px;
+  padding-bottom: 12px;
+
+  margin-right: 14px;
+  border: 1px solid white;
+}

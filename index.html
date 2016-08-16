@@ -2,20 +2,22 @@
 layout: default
 ---
 
-<div class="layer layer--overlay js-layer-1" style="background-image: url(images/1-bg.png)"></div>
-<div class="layer layer--overlay js-layer-1" style="background-image: url(images/1-fg.png)"></div>
+<div class="layer layer--overlay js-layer-1 active" style="background-image: url(images/1-bg.png)"></div>
+<div class="layer layer--overlay js-layer-1 active" style="background-image: url(images/1-fg.png)"></div>
 <div class="layer layer--overlay js-layer-2" style="background-image: url(images/2-bg.png)"></div>
 <div class="layer layer--overlay js-layer-2" style="background-image: url(images/2-fg.png)"></div>
 
 <div class="layer layer--content">
-  <section data-index="1">
+  <section>
     <div class="row">
       <div class="col-sm-7">
       </div>
       <div class="col-sm-4">
         <div class="layer--content__text" style="margin-top: 50vh;">
+          <span class="js-scene-trigger" data-index="1"></span>
           <p>
             <span class="dropcap">I</span>magine you’re in a rainforest in Costa Rica, and you come across a great big trunk of a tree. You look down at the ground, and among the brown mix of roots and leaves you can clearly make out hundreds of little green lines, like arrow markers that surround the tree and point towards its base.
+            <span class="js-scene-trigger" data-index="2"></span>
           </p>
           <p>
             This is the situation in which biologists Donald Strong and Thomas Ray found themselves in the 1970s. They describe seeing “thousands of bright green seedlings [..] in contrast against the brown leaf litter, creeping inward from all sides of the tree. The seedlings appear as short spokes of a wheel with the tree as the hub.”
@@ -25,104 +27,17 @@ layout: default
     </div>
   </section>
 
-  <section data-index="2">
+  <section>
     <div class="row">
       <div class="col-sm-7">
       </div>
       <div class="col-sm-4">
         <div class="layer--content__text">
           <p>
-            This is the situation in which biologists Donald Strong and Thomas Ray found themselves in the 1970s. They describe seeing “thousands of bright green seedlings [..] in contrast against the brown leaf litter, creeping inward from all sides of the tree. The seedlings appear as short spokes of a wheel with the tree as the hub.”
+            The seedlings they saw were the young shoots of vines. But instead of meandering about and aimlessly exploring the forest floor around them, these young vines seem to ‘hone in’ on the trunk of the tree, a little like iron filings attracted to a magnet. Being the sort of folks who can’t walk away from a good question, these biologists wondered, how do these vines possibly ‘know’ which way to go? What was the force behind this mysterious ‘tree magnetism’?
           </p>
         </div>
       </div>
     </div>
   </section>
 </div>
-<!-- 
-
-<div class="row background-cover" style="background-image: url('images/bg-1.png'); color: white;">
-  <div class="overlay background-cover" style="background-image: url('images/bg-2.png');"></div>
-  <div class="col-sm-6">
-    <div class="pinnable">
-      <div class="vine-container"></div>
-    </div>
-  </div>
-  <div class="col-sm-6 text-content">
-    <h1>How do they find a ladder to the sky?</h1>
-    <p>
-      Well, they don’t have eyes… but being plants, they can tell light from dark, and somehow – we don’t know exactly how –  they’re able to “see” – if that’s the right word –  patches of light or dark  around them. So this little vine senses a patch of darkness in any direction.
-    </p>
-    <blockquote>
-      AHA! A shadow!
-    </blockquote>
-    <p>
-      A shadow means something is blocking the sun. The bigger the shadow, the bigger that something is.
-    </p>
-  </div>
-</div>
-<div class="row" style="background-color: #7EBEA3; color: white">
-  <div class="col-sm-6">
-    <div class="pinnable">
-    </div>
-  </div>
-  <div class="col-sm-6 text-content">
-    <h1>Title of the Section</h1>
-    <p>
-      Lorem ipsum dolor sit amet, velit potenti facilis suspendisse eget non, viverra nec ut egestas, sed nullam ut et, aliquam arcu iaculis posuere nec. Neque vestibulum ut id. Magna tincidunt lorem non neque ipsum turpis, imperdiet ullamcorper mauris mauris, metus diam mollis purus convallis. Wisi imperdiet nulla, in ac sodales malesuada at. Ante duis nec arcu inceptos lobortis, hendrerit sed vel nulla purus per, semper imperdiet in suspendisse nibh litora turpis, rhoncus vestibulum, ac enim erat lectus phasellus tristique. Suscipit libero, facilisi porta lacus, eu bibendum odio mauris, nullam quam. Lobortis ligula rutrum, adipiscing morbi cras velit vulputate, aenean quis. Donec wisi odio, quisque penatibus, sint pharetra diam hendrerit.
-    </p>
-    <p>
-      Non elit ipsum velit aliquam. Eget in sagittis, malesuada wisi vel leo, sed suspendisse tincidunt a justo suspendisse et. Ullamcorper condimentum adipiscing eleifend nibh nulla, proin mollis, aliquam lacinia volutpat velit in torquent, lacus amet libero. Massa risus. Adipiscing massa ut tincidunt egestas lorem adipiscing, purus tempus odio, nulla mauris auctor faucibus ut vel, turpis soluta ligula. Non id class in, dictum adipiscing scelerisque posuere pulvinar nulla nec, vel sagittis lorem. Eros condimentum metus. Justo dui urna, vestibulum placerat eu et felis. Ullamcorper maecenas ut porttitor nonummy sagittis ut, pellentesque eget fusce ac
-    </p>
-  </div>
-</div>
-<div class="row" style="background-color: #A9CBA6">
-  <div class="col-sm-6">
-    <div class="pinnable">
-      
-    </div>
-  </div>
-  <div class="col-sm-6 text-content">
-    <h1>Title of the Section</h1>
-    <p>
-      Lorem ipsum dolor sit amet, velit potenti facilis suspendisse eget non, viverra nec ut egestas, sed nullam ut et, aliquam arcu iaculis posuere nec. Neque vestibulum ut id. Magna tincidunt lorem non neque ipsum turpis, imperdiet ullamcorper mauris mauris, metus diam mollis purus convallis. Wisi imperdiet nulla, in ac sodales malesuada at. Ante duis nec arcu inceptos lobortis, hendrerit sed vel nulla purus per, semper imperdiet in suspendisse nibh litora turpis, rhoncus vestibulum, ac enim erat lectus phasellus tristique. Suscipit libero, facilisi porta lacus, eu bibendum odio mauris, nullam quam. Lobortis ligula rutrum, adipiscing morbi cras velit vulputate, aenean quis. Donec wisi odio, quisque penatibus, sint pharetra diam hendrerit.
-    </p>
-    <p>
-      Non elit ipsum velit aliquam. Eget in sagittis, malesuada wisi vel leo, sed suspendisse tincidunt a justo suspendisse et. Ullamcorper condimentum adipiscing eleifend nibh nulla, proin mollis, aliquam lacinia volutpat velit in torquent, lacus amet libero. Massa risus. Adipiscing massa ut tincidunt egestas lorem adipiscing, purus tempus odio, nulla mauris auctor faucibus ut vel, turpis soluta ligula. Non id class in, dictum adipiscing scelerisque posuere pulvinar nulla nec, vel sagittis lorem. Eros condimentum metus. Justo dui urna, vestibulum placerat eu et felis. Ullamcorper maecenas ut porttitor nonummy sagittis ut, pellentesque eget fusce ac
-    </p>
-  </div>
-</div>
-<div class="row" style="background-color: #E0DBA4">
-  <div class="col-sm-6">
-    <div class="pinnable">
-      
-    </div>
-  </div>
-  <div class="col-sm-6 text-content">
-    <h1>Title of the Section</h1>
-    <p>
-      Lorem ipsum dolor sit amet, velit potenti facilis suspendisse eget non, viverra nec ut egestas, sed nullam ut et, aliquam arcu iaculis posuere nec. Neque vestibulum ut id. Magna tincidunt lorem non neque ipsum turpis, imperdiet ullamcorper mauris mauris, metus diam mollis purus convallis. Wisi imperdiet nulla, in ac sodales malesuada at. Ante duis nec arcu inceptos lobortis, hendrerit sed vel nulla purus per, semper imperdiet in suspendisse nibh litora turpis, rhoncus vestibulum, ac enim erat lectus phasellus tristique. Suscipit libero, facilisi porta lacus, eu bibendum odio mauris, nullam quam. Lobortis ligula rutrum, adipiscing morbi cras velit vulputate, aenean quis. Donec wisi odio, quisque penatibus, sint pharetra diam hendrerit.
-    </p>
-    <p>
-      Non elit ipsum velit aliquam. Eget in sagittis, malesuada wisi vel leo, sed suspendisse tincidunt a justo suspendisse et. Ullamcorper condimentum adipiscing eleifend nibh nulla, proin mollis, aliquam lacinia volutpat velit in torquent, lacus amet libero. Massa risus. Adipiscing massa ut tincidunt egestas lorem adipiscing, purus tempus odio, nulla mauris auctor faucibus ut vel, turpis soluta ligula. Non id class in, dictum adipiscing scelerisque posuere pulvinar nulla nec, vel sagittis lorem. Eros condimentum metus. Justo dui urna, vestibulum placerat eu et felis. Ullamcorper maecenas ut porttitor nonummy sagittis ut, pellentesque eget fusce ac
-    </p>
-  </div>
-</div>
-<div class="row" style="background-color: #F7F0BA">
-  <div class="col-sm-6">
-    <div class="pinnable">
-      
-    </div>
-  </div>
-  <div class="col-sm-6 text-content">
-    <h1>Title of the Section</h1>
-    <p>
-      Lorem ipsum dolor sit amet, velit potenti facilis suspendisse eget non, viverra nec ut egestas, sed nullam ut et, aliquam arcu iaculis posuere nec. Neque vestibulum ut id. Magna tincidunt lorem non neque ipsum turpis, imperdiet ullamcorper mauris mauris, metus diam mollis purus convallis. Wisi imperdiet nulla, in ac sodales malesuada at. Ante duis nec arcu inceptos lobortis, hendrerit sed vel nulla purus per, semper imperdiet in suspendisse nibh litora turpis, rhoncus vestibulum, ac enim erat lectus phasellus tristique. Suscipit libero, facilisi porta lacus, eu bibendum odio mauris, nullam quam. Lobortis ligula rutrum, adipiscing morbi cras velit vulputate, aenean quis. Donec wisi odio, quisque penatibus, sint pharetra diam hendrerit.
-    </p>
-    <p>
-      Non elit ipsum velit aliquam. Eget in sagittis, malesuada wisi vel leo, sed suspendisse tincidunt a justo suspendisse et. Ullamcorper condimentum adipiscing eleifend nibh nulla, proin mollis, aliquam lacinia volutpat velit in torquent, lacus amet libero. Massa risus. Adipiscing massa ut tincidunt egestas lorem adipiscing, purus tempus odio, nulla mauris auctor faucibus ut vel, turpis soluta ligula. Non id class in, dictum adipiscing scelerisque posuere pulvinar nulla nec, vel sagittis lorem. Eros condimentum metus. Justo dui urna, vestibulum placerat eu et felis. Ullamcorper maecenas ut porttitor nonummy sagittis ut, pellentesque eget fusce ac
-    </p>
-  </div>
-</div> -->
-
-<path id="vine-path" d="M51.28125,434.523438 C51.28125,434.523438 -35.8398438,365.667969 19.0273438,273.207031 C73.8945312,180.746094 66.2539069,192.25 42.640625,130.128906 C19.0273431,68.0078125 100.121094,44.828125 85.1054688,0.4140625"></path>

@@ -1,15 +1,17 @@
 $(document).ready(function() {
-  // scrollmagic
+
+  /***** scrollmagic *****/
   var controller = new ScrollMagic.Controller({
     globalSceneOptions: {
-      offset: 100 // TODO this might need adjusting based on vh
+      // offset: 100
     }
   });
   // pin text
   $('.layer--content__text p').each(function(i, d) {
     new ScrollMagic.Scene({
       triggerElement: d,
-      duration: 200
+      offset: 100,
+      duration: '100%'
     })
     .setPin(d)
     .addTo(controller);
@@ -30,4 +32,62 @@ $(document).ready(function() {
     .addTo(controller);
   });
   
+  /***** vine things *****/
+  var container = $(".vine-container").get(0);
+  var vine = new VineRenderer({
+    container: container,
+    pointCount: 100
+  });
+
+  var maxPathLength = 0;
+
+  var snakeStates = [];
+
+  $('.vine-path-scene2').each(function(i, elem) {
+    var path = Snap(elem);
+    var pathLength = Snap.path.getTotalLength(path);
+    var offset = path.getPointAtLength(pathLength);
+
+    snakeStates.push({
+      path: path,
+      pathLength: pathLength,
+      offset: offset
+    });
+
+    vine.addSnake();
+
+    if (pathLength > maxPathLength) maxPathLength = pathLength;
+  });
+
+  // animation stuff
+  var maxTime = maxPathLength / vine.ropeLength;
+  var tweenState = { time: 0 };
+  
+  var tween = TweenMax.to(tweenState, 3, {time: maxTime, onUpdate: onUpdate});
+
+  new ScrollMagic.Scene({
+      triggerElement: container,
+      triggerHook: 'onLeave'
+    })
+    .setTween(tween)
+    .setPin(container)
+    .addTo(controller);
+
+  function onUpdate() {
+    for (var i = 0; i < snakeStates.length; i++) {
+      var state = snakeStates[i];
+      vine.updatePoints(i, function(points) {
+        for (var i = 0; i < vine.pointCount; i++) {
+          var pos = (vine.ropeLength / vine.pointCount * (i * tweenState.time));
+          if (pos < state.pathLength) {
+            var point = state.path.getPointAtLength(pos);
+            points[i].x = vine.width / 2 + (point.x - state.offset.x);
+            points[i].y = vine.height - (point.y - state.offset.y);
+          }
+        }
+      });  
+    }
+    
+    vine.render();
+  }
 });

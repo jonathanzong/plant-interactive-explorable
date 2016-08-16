@@ -1,11 +1,12 @@
-
-
-html, body, main, section, .container-fluid, .background-cover,
-%fullsize {
+html, body, main, section, .container-fluid, .background-cover, %fullsize {
   height: 100%;
   width: 100%;
   padding: 0;
   margin: 0;
+}
+
+html, body {
+  overflow: hidden;
 }
 
 section {
@@ -29,6 +30,14 @@ section {
   background-size: cover;
 
   pointer-events: none;
+
+  opacity: 0;
+  transition: opacity 1s;
+
+  &.active {
+    opacity: 1;
+    transition: opacity 0.5s;
+  }
 }
 
 .layer--content {

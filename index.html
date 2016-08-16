@@ -2,9 +2,13 @@
 layout: default
 ---
 
-<section>
-  <div class="layer layer--overlay" style="background-image: url('images/1-bg.png');"></div>
-  <div class="layer layer--content">
+<div class="layer layer--overlay js-layer-1" style="background-image: url(images/1-bg.png)"></div>
+<div class="layer layer--overlay js-layer-1" style="background-image: url(images/1-fg.png)"></div>
+<div class="layer layer--overlay js-layer-2" style="background-image: url(images/2-bg.png)"></div>
+<div class="layer layer--overlay js-layer-2" style="background-image: url(images/2-fg.png)"></div>
+
+<div class="layer layer--content">
+  <section data-index="1">
     <div class="row">
       <div class="col-sm-7">
       </div>
@@ -19,13 +23,9 @@ layout: default
         </div>
       </div>
     </div>
-  </div>
-  <div class="layer layer--overlay" style="background-image: url('images/1-fg.png');"></div>
-</section>
+  </section>
 
-<section>
-  <div class="layer layer--overlay" style="background-image: url('images/2-bg.png');"></div>
-  <div class="layer layer--content">
+  <section data-index="2">
     <div class="row">
       <div class="col-sm-7">
       </div>
@@ -37,9 +37,8 @@ layout: default
         </div>
       </div>
     </div>
-  </div>
-  <div class="layer layer--overlay" style="background-image: url('images/2-fg.png');"></div>
-</section>
+  </section>
+</div>
 <!-- 
 
 <div class="row background-cover" style="background-image: url('images/bg-1.png'); color: white;">

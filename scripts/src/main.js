@@ -54,3 +54,28 @@
 //   $(window).resize(resizeHandler);
 //   $(document).ready(resizeHandler);
 // });
+
+$(document).ready(function() {
+  var controller = new ScrollMagic.Controller();
+  $('.layer--content__text p').each(function(i, d) {
+    new ScrollMagic.Scene({
+      triggerElement: d,
+      duration: 200,
+      offset: 100
+    })
+    .setPin(d)
+    .setClassToggle(d, 'js-scrollmagic-active')
+    .on('enter leave', function (event) {
+      applyActiveBgFgLayers();
+    })
+    .addTo(controller);
+  });
+
+  applyActiveBgFgLayers();
+});
+
+function applyActiveBgFgLayers() {
+  var activeSection = $('.js-scrollmagic-active').last().closest('section').get(0) || $('section').first().get(0);
+  $('.layer--overlay').removeClass('active');
+  $('.js-layer-' + $(activeSection).data('index')).addClass('active');
+}

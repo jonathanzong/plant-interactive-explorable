@@ -8,9 +8,15 @@ blockquote {
 }
 
 h1 {
-  font-family: $pullquote-font-family;
-  font-size: 1.6em;
+  font-family: $base-font-family;
+  font-size: 5em;
+  font-weight: bold;
   margin: (1.5 * $base-font-size) 0 $base-font-size 0;
+}
+
+h3 {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
 }
 
 .dropcap {

@@ -3,7 +3,7 @@ $(document).ready(function() {
   /***** scrollmagic *****/
   var controller = new ScrollMagic.Controller();
   // pin text
-  $('.layer--content__text p').each(function(i, d) {
+  $('.layer--content__text p, .js-content-pinnable').each(function(i, d) {
     new ScrollMagic.Scene({
       triggerElement: d,
       offset: 100,

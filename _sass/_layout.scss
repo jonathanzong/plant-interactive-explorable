@@ -5,17 +5,11 @@ html, body, main, section, .container-fluid, .background-cover, .vine-container,
   margin: 0;
 }
 
-html, body {
-  overflow: hidden;
-}
-
 section {
   position: relative;
 }
 
 .layer {
-  @extend %fullsize;
-
   position: absolute;
   top: 0;
   left: 0;
@@ -24,6 +18,8 @@ section {
 }
 
 .layer--overlay {
+  @extend %fullsize;
+
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
@@ -44,8 +40,6 @@ section {
   background: -moz-linear-gradient(left,  rgba(0,0,0,0) 30%, rgba(0,0,0,0.5) 100%);
   background: -webkit-linear-gradient(left,  rgba(0,0,0,0) 30%,rgba(0,0,0,0.5) 100%);
   background: linear-gradient(to right,  rgba(0,0,0,0) 30%,rgba(0,0,0,0.5) 100%);
-
-  overflow-y: scroll;
 }
 
 .layer--content__text {

@@ -16,6 +16,15 @@ $(document).ready(function() {
     .setPin(d)
     .addTo(controller);
   });
+  // pin overlays
+  $('.layer--overlay').each(function(i, d) {
+    new ScrollMagic.Scene({
+      triggerElement: d,
+      triggerHook: 'onLeave'
+    })
+    .setPin(d)
+    .addTo(controller);
+  });
   // trigger scene changes
   $('.js-scene-trigger').each(function(i, d) {
     new ScrollMagic.Scene({

@@ -7,7 +7,7 @@ $(document).ready(function() {
     new ScrollMagic.Scene({
       triggerElement: d,
       offset: 100,
-      duration: '75%'
+      duration: i == 0 ? '35%' : '70%'
     })
     .setPin(d)
     .addTo(controller);

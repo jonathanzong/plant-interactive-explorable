@@ -71,11 +71,12 @@ $(document).ready(function() {
   var tween = TweenMax.to(tweenState, 3, {time: maxTime, onUpdate: onUpdate});
 
   new ScrollMagic.Scene({
-      triggerElement: container,
-      triggerHook: 'onLeave'
+      triggerElement: $('.vine-trigger').get(0),
+      triggerHook: 'onLeave',
+      duration: $('.vine-trigger').closest('section').height()
     })
     .setTween(tween)
-    .setPin(container)
+    .setClassToggle(container, 'active')
     .addTo(controller);
 
   function onUpdate() {

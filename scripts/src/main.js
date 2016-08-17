@@ -72,7 +72,7 @@ $(document).ready(function() {
 
   new ScrollMagic.Scene({
       triggerElement: $('.vine-trigger').get(0),
-      triggerHook: 'onLeave',
+      triggerHook: 'onEnter',
       duration: $('.vine-trigger').closest('section').height()
     })
     .setTween(tween)

@@ -80,6 +80,8 @@ $(document).ready(function() {
     .addTo(controller);
 
   function onUpdate() {
+    if (!$(container).hasClass('active')) return;
+    
     for (var i = 0; i < snakeStates.length; i++) {
       var state = snakeStates[i];
       vine.updatePoints(i, function(points) {

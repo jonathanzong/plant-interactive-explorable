@@ -1,17 +1,13 @@
 $(document).ready(function() {
 
   /***** scrollmagic *****/
-  var controller = new ScrollMagic.Controller({
-    globalSceneOptions: {
-      // offset: 100
-    }
-  });
+  var controller = new ScrollMagic.Controller();
   // pin text
   $('.layer--content__text p').each(function(i, d) {
     new ScrollMagic.Scene({
       triggerElement: d,
       offset: 100,
-      duration: '100%'
+      duration: '75%'
     })
     .setPin(d)
     .addTo(controller);

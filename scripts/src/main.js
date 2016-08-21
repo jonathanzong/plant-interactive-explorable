@@ -6,7 +6,6 @@ $(document).ready(function() {
   $('.layer--content__text p, .js-content-pinnable').each(function(i, d) {
     new ScrollMagic.Scene({
       triggerElement: d,
-      offset: 100,
       duration: i == 0 ? '35%' : '70%'
     })
     .setPin(d)
@@ -31,8 +30,8 @@ $(document).ready(function() {
     .on('enter leave', function() {
       var elem = $('.js-scene-trigger.active').last().get(0) || $('.js-scene-trigger').first().get(0);
       var idx = $(elem).data('index');
-      $('.layer--overlay').removeClass('active');
-      $('.js-layer-' + idx).addClass('active');
+      $('.js-layer').removeClass('active');
+      $('.js-layer--' + idx).addClass('active');
     })
     .addTo(controller);
   });
@@ -71,9 +70,9 @@ $(document).ready(function() {
   var tween = TweenMax.to(tweenState, 3, {time: maxTime, onUpdate: onUpdate});
 
   new ScrollMagic.Scene({
-      triggerElement: $('.vine-trigger').get(0),
+      triggerElement: $('.js-vine-trigger').get(0),
       triggerHook: 'onEnter',
-      duration: $('.vine-trigger').closest('section').height()
+      duration: $('.js-vine-trigger').closest('section').height()
     })
     .setTween(tween)
     .setClassToggle(container, 'active')
@@ -81,7 +80,7 @@ $(document).ready(function() {
 
   function onUpdate() {
     if (!$(container).hasClass('active')) return;
-    
+
     for (var i = 0; i < snakeStates.length; i++) {
       var state = snakeStates[i];
       vine.updatePoints(i, function(points) {

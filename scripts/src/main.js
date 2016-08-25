@@ -35,7 +35,7 @@ $(document).ready(function() {
     })
     .addTo(controller);
   });
-  
+
   /***** vine things *****/
   var container = $(".vine-container").get(0);
   var vine = new VineRenderer({
@@ -43,6 +43,7 @@ $(document).ready(function() {
     pointCount: 100
   });
 
+  /**
   var maxPathLength = 0;
 
   var snakeStates = [];
@@ -66,7 +67,7 @@ $(document).ready(function() {
   // animation stuff
   var maxTime = maxPathLength / vine.ropeLength;
   var tweenState = { time: 0 };
-  
+
   var tween = TweenMax.to(tweenState, 3, {time: maxTime, onUpdate: onUpdate});
 
   new ScrollMagic.Scene({
@@ -92,9 +93,11 @@ $(document).ready(function() {
             points[i].y = vine.height - (point.y - state.offset.y);
           }
         }
-      });  
+      });
     }
-    
+
     vine.render();
   }
+  **/
+
 });

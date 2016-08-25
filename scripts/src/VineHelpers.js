@@ -20,30 +20,32 @@ var VineRenderer = function(opts) {
   // state
   var pointCount = opts.pointCount || 20;
   var ropeLength = opts.ropeLength || 300;
-  var snakes = [];
+  var vines = [];
 
-  var snakeTexture = PIXI.Texture.fromImage(opts.textureImage || 'images/vine.png');
+  var vineTexture = PIXI.Texture.fromImage(opts.textureImage || 'images/vine.png');
 
-  function addSnake() {
+  function addVine() {
     var points = [];
     for (var i = 0; i < pointCount; i++) {
       points.push(new PIXI.Point(i * ropeLength / pointCount, 0));
     }
-    var snake = new PIXI.mesh.Rope(snakeTexture, points);
-    snakes.push({
-      snake: snake,
+    var vine = new PIXI.mesh.Rope(vineTexture, points);
+    vine.scale.x = 0.5;
+    vine.scale.y = 0.5;
+    vines.push({
+      vine: vine,
       points: points
     })
-    stage.addChild(snake);
+    stage.addChild(vine);
   }
-  
+
   // functions
   function render() {
     renderer.render(stage);
   }
 
   function updatePoints(i, fun) {
-    fun(snakes[i].points);
+    fun(vines[i].points);
   }
 
   $(opts.container).append(renderer.view);
@@ -56,7 +58,7 @@ var VineRenderer = function(opts) {
     ropeLength: ropeLength,
     updatePoints: updatePoints,
     render: render,
-    addSnake: addSnake
+    addVine: addVine
   };
 
 }

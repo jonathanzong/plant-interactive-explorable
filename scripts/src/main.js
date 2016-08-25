@@ -43,23 +43,23 @@ $(document).ready(function() {
     pointCount: 100
   });
 
-  /**
+
   var maxPathLength = 0;
 
-  var snakeStates = [];
+  var vineStates = [];
 
   $('.vine-path-scene2').each(function(i, elem) {
     var path = Snap(elem);
     var pathLength = Snap.path.getTotalLength(path);
     var offset = path.getPointAtLength(pathLength);
 
-    snakeStates.push({
+    vineStates.push({
       path: path,
       pathLength: pathLength,
       offset: offset
     });
 
-    vine.addSnake();
+    vine.addVine();
 
     if (pathLength > maxPathLength) maxPathLength = pathLength;
   });
@@ -73,7 +73,7 @@ $(document).ready(function() {
   new ScrollMagic.Scene({
       triggerElement: $('.js-vine-trigger').get(0),
       triggerHook: 'onEnter',
-      duration: $('.js-vine-trigger').closest('section').height()
+      duration: $('.js-vine-trigger').closest('animate').height()
     })
     .setTween(tween)
     .setClassToggle(container, 'active')
@@ -82,15 +82,15 @@ $(document).ready(function() {
   function onUpdate() {
     if (!$(container).hasClass('active')) return;
 
-    for (var i = 0; i < snakeStates.length; i++) {
-      var state = snakeStates[i];
+    for (var i = 0; i < vineStates.length; i++) {
+      var state = vineStates[i];
       vine.updatePoints(i, function(points) {
         for (var i = 0; i < vine.pointCount; i++) {
-          var pos = (vine.ropeLength / vine.pointCount * (i * tweenState.time));
+          var pos = (vine.ropeLength / vine.pointCount * (i * tweenState.time * state.pathLength/maxPathLength));
           if (pos < state.pathLength) {
             var point = state.path.getPointAtLength(pos);
-            points[i].x = vine.width / 2 + (point.x - state.offset.x);
-            points[i].y = vine.height - (point.y - state.offset.y);
+            points[i].x = point.x/0.5;
+            points[i].y = point.y/0.5;
           }
         }
       });
@@ -98,6 +98,6 @@ $(document).ready(function() {
 
     vine.render();
   }
-  **/
+
 
 });

@@ -85,17 +85,19 @@ layout: default
           <div class="layer--content__text"">
             <p></p>
 
-            <p>
-              Some words go here.
-            </p>
-            <animate>
-            <div class="js-vine-trigger"></div>
-            <p></p>
-            </animate>
-            <p>
-              Some more words go here.
-            </p>
-            <div class="js-vine-kill"></div> <!-- would be neat if we can do something like this -->
+            <p>A vine comes in.</p>
+
+            <animate> <!-- vine animation spans the animate tag -->
+              <div class="js-vine-trigger"></div>
+              <p></p>
+            </animate> <!-- so animation ends here, -->
+                       <!-- but final vine scene stays on screen -->
+
+            <p>The vine sticks around.</p>
+
+            <div class="js-vine-kill"></div> <!-- until we remove it -->
+
+            <p>And the vine disappears.</p>
 
           </div>
         </div>

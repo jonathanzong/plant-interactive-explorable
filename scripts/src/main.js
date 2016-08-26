@@ -76,8 +76,24 @@ $(document).ready(function() {
       duration: $('.js-vine-trigger').closest('animate').height()
     })
     .setTween(tween)
-    .setClassToggle(container, 'active')
+    .on('enter', function() {
+      $(container).addClass('active');
+    })
+    /*.setClassToggle(container, 'active')*/
     .addTo(controller);
+
+
+  new ScrollMagic.Scene({
+      triggerElement: $('.js-vine-kill').get(0),
+      triggerHook: 'onEnter',
+      duration: 0
+    })
+    .on('enter', function() {
+      $(container).removeClass('active');
+    })
+    .addTo(controller);
+
+
 
   function onUpdate() {
     if (!$(container).hasClass('active')) return;

@@ -3,6 +3,11 @@ html, body, main, section, .container-fluid, .background-cover, .vine-container,
   width: 1200px;
   padding: 0;
   margin: 0;
+  z-index: 0;
+}
+
+.vine-container{
+  z-index: -2;
 }
 
 section {
@@ -36,6 +41,9 @@ section {
     transition: opacity 0.5s;
   }
   &.background {
+    z-index: -3;
+  }
+  &.middleground {
     z-index: -1;
   }
   &.foreground {

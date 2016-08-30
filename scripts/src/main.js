@@ -36,6 +36,9 @@ $(document).ready(function() {
     .addTo(controller);
   });
 
+
+
+
   /***** vine things *****/
   var container = $(".vine-container").get(0);
   var vine = new VineRenderer({
@@ -43,8 +46,6 @@ $(document).ready(function() {
     pointCount: 100
   });
 
-
-  var maxPathLength = 0;
 
   var vineStates = [];
 
@@ -60,27 +61,35 @@ $(document).ready(function() {
     });
 
     vine.addVine();
-
-    if (pathLength > maxPathLength) maxPathLength = pathLength;
   });
 
   // animation stuff
-  var maxTime = maxPathLength / vine.ropeLength;
+
+  var durationValue = 0;
+  function getDuration () {
+    return durationValue;
+  }
+  function updateDuration () {
+    durationValue = $('.js-vine-trigger').closest('animate').height();
+  }
+
   var tweenState = { time: 0 };
 
-  var tween = TweenMax.to(tweenState, 3, {time: maxTime, onUpdate: onUpdate});
-
-  new ScrollMagic.Scene({
-      triggerElement: $('.js-vine-trigger').get(0),
-      triggerHook: 'onEnter',
-      duration: $('.js-vine-trigger').closest('animate').height()
-    })
-    .setTween(tween)
-    .on('enter', function() {
-      $(container).addClass('active');
-    })
-    /*.setClassToggle(container, 'active')*/
-    .addTo(controller);
+  $('.js-vine-trigger').each(function(i, d) {
+    new ScrollMagic.Scene({
+        triggerElement: d,
+        triggerHook: 'onEnter',
+        duration: getDuration
+      })
+      .setTween(tweenState, {time: $(d).data('time')})
+      .on('enter', function() {
+        $(container).addClass('active')
+      })
+      .on('enter', updateDuration)
+      .on('progress', onUpdate)
+      /*.setClassToggle(container, 'active')*/
+      .addTo(controller);
+ });
 
 
   new ScrollMagic.Scene({
@@ -94,7 +103,6 @@ $(document).ready(function() {
     .addTo(controller);
 
 
-
   function onUpdate() {
     if (!$(container).hasClass('active')) return;
 
@@ -102,7 +110,7 @@ $(document).ready(function() {
       var state = vineStates[i];
       vine.updatePoints(i, function(points) {
         for (var i = 0; i < vine.pointCount; i++) {
-          var pos = (vine.ropeLength / vine.pointCount * (i * tweenState.time * state.pathLength/maxPathLength));
+          var pos = (i / vine.pointCount) * state.pathLength * tweenState.time ;
           if (pos < state.pathLength) {
             var point = state.path.getPointAtLength(pos);
             points[i].x = point.x/0.5;

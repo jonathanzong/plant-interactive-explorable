@@ -37,33 +37,47 @@ $(document).ready(function() {
   });
 
 
-
-
   /***** vine things *****/
   var container = $(".vine-container").get(0);
-  var vine = new VineRenderer({
-    container: container,
-    pointCount: 100
-  });
+  var vineStates = {};
+  var vine = {};
+  var tweenState = {};
+  var initialized = {};
 
+  // setup renderer
+  var renderer = PIXI.autoDetectRenderer(
+    $(container).width() || 800,
+    $(container).height() || 600,
+    { transparent: true });
 
-  var vineStates = [];
+  $(container).append(renderer.view);
 
-  $('.vine-path-scene2').each(function(i, elem) {
-    var path = Snap(elem);
-    var pathLength = Snap.path.getTotalLength(path);
-    var offset = path.getPointAtLength(pathLength);
+  function initializeVine(sceneID){
 
-    vineStates.push({
-      path: path,
-      pathLength: pathLength,
-      offset: offset
+    if(initialized[sceneID]) return;
+
+    vine[sceneID] = new VineScene({
+      renderer: renderer,
+      container: container,
+      pointCount: 100
     });
 
-    vine.addVine();
-  });
+    vineStates[sceneID] = [];
+    $('.vine-path-scene'+sceneID).each(function(i, elem) {
+      var path = Snap(elem);
+      var pathLength = Snap.path.getTotalLength(path);
 
-  // animation stuff
+      vineStates[sceneID].push({
+        path: path,
+        pathLength: pathLength,
+      });
+
+      vine[sceneID].addVine();
+    });
+
+    initialized[sceneID] = true;
+    tweenState[sceneID] = { time: 0 };
+  }
 
   var durationValue = 0;
   function getDuration () {
@@ -73,44 +87,54 @@ $(document).ready(function() {
     durationValue = $('.js-vine-trigger').closest('animate').height();
   }
 
-  var tweenState = { time: 0 };
-
   $('.js-vine-trigger').each(function(i, d) {
+
+    var scene_id = $(d).data('scene');
+    var scene_duration = $(d).data('time');
+
+    initializeVine(scene_id);
+
     new ScrollMagic.Scene({
         triggerElement: d,
         triggerHook: 'onEnter',
         duration: getDuration
       })
-      .setTween(tweenState, {time: $(d).data('time')})
+      .setTween(tweenState[scene_id], {time: scene_duration})
       .on('enter', function() {
         $(container).addClass('active')
+        updateDuration();
       })
-      .on('enter', updateDuration)
-      .on('progress', onUpdate)
+      .on('progress', function(){
+        onUpdate(scene_id);
+      })
       /*.setClassToggle(container, 'active')*/
       .addTo(controller);
  });
 
 
-  new ScrollMagic.Scene({
-      triggerElement: $('.js-vine-kill').get(0),
-      triggerHook: 'onEnter',
-      duration: 0
-    })
-    .on('enter', function() {
-      $(container).removeClass('active');
-    })
-    .addTo(controller);
+  // this kills the vine, while retaining reverse behavior
+  // so if you scroll up, it shows you the previous vine scene
+  $('.js-vine-kill').each(function(i, d) {
 
+    new ScrollMagic.Scene({
+        triggerElement: d,
+        triggerHook: 'onCenter',
+        duration: 0.1
+      })
+      .on('enter', function() {
+        $(container).toggleClass('active');
+      })
+      .addTo(controller);
+  });
 
-  function onUpdate() {
+  function onUpdate(sceneID) {
     if (!$(container).hasClass('active')) return;
 
-    for (var i = 0; i < vineStates.length; i++) {
-      var state = vineStates[i];
-      vine.updatePoints(i, function(points) {
-        for (var i = 0; i < vine.pointCount; i++) {
-          var pos = (i / vine.pointCount) * state.pathLength * tweenState.time ;
+    for (var i = 0; i < vineStates[sceneID].length; i++) {
+      var state = vineStates[sceneID][i];
+      vine[sceneID].updatePoints(i, function(points) {
+        for (var i = 0; i < vine[sceneID].pointCount; i++) {
+          var pos = (i / vine[sceneID].pointCount) * state.pathLength * tweenState[sceneID].time ;
           if (pos < state.pathLength) {
             var point = state.path.getPointAtLength(pos);
             points[i].x = point.x/0.5;
@@ -120,7 +144,7 @@ $(document).ready(function() {
       });
     }
 
-    vine.render();
+    vine[sceneID].render();
   }
 
 

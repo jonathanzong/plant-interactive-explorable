@@ -7,14 +7,9 @@ opts =
   textureImage: string (file path)
 }
 */
-var VineRenderer = function(opts) {
+var VineScene = function(opts) {
   opts = opts || {};
 
-  // setup renderer
-  var renderer = PIXI.autoDetectRenderer(
-    $(opts.container).width() || 800,
-    $(opts.container).height() || 600,
-    { transparent: true });
   var stage = new PIXI.Container();
 
   // state
@@ -41,24 +36,21 @@ var VineRenderer = function(opts) {
 
   // functions
   function render() {
-    renderer.render(stage);
+    opts.renderer.render(stage);
   }
 
   function updatePoints(i, fun) {
     fun(vines[i].points);
   }
 
-  $(opts.container).append(renderer.view);
 
   // expose public properties
   return {
-    width: renderer.width,
-    height: renderer.height,
     pointCount: pointCount,
     ropeLength: ropeLength,
-    updatePoints: updatePoints,
+    addVine: addVine,
     render: render,
-    addVine: addVine
+    updatePoints: updatePoints
   };
 
 }

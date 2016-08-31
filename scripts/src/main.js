@@ -59,7 +59,7 @@ $(document).ready(function() {
     vine[sceneID] = new VineScene({
       renderer: renderer,
       container: container,
-      pointCount: 100
+      pointCount: 200
     });
 
     vineStates[sceneID] = [];

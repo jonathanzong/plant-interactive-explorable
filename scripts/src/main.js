@@ -46,8 +46,8 @@ $(document).ready(function() {
 
   // setup renderer
   var renderer = PIXI.autoDetectRenderer(
-    $(container).width() || 800,
-    $(container).height() || 600,
+    1200,
+    700,
     { transparent: true });
 
   $(container).append(renderer.view);
@@ -146,6 +146,5 @@ $(document).ready(function() {
 
     vine[sceneID].render();
   }
-
 
 });

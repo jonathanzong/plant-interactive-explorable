@@ -6,6 +6,7 @@ $(document).ready(function() {
   $('.layer--content__text p, .js-content-pinnable').each(function(i, d) {
     new ScrollMagic.Scene({
       triggerElement: d,
+      triggerHook: 0.2,
       duration: i == 0 ? '35%' : '70%'
     })
     .setPin(d)

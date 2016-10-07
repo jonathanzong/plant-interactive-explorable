@@ -148,4 +148,19 @@ $(document).ready(function() {
     vine[sceneID].render();
   }
 
+
+
+  function trace(elem) {  
+    var state = {
+      length: 0,
+      pathLength: elem.getTotalLength()
+    };
+
+    function drawStroke() {
+      elem.style.strokeDasharray = [state.length, state.pathLength].join(' ');
+    }
+
+    TweenMax.to(state, 3, {length: state.pathLength, onUpdate: drawStroke, ease: Linear.easeNone });
+  }
+
 });

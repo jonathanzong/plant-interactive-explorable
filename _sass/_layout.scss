@@ -7,8 +7,9 @@ html, body, main, section, .container-fluid, .background-cover, %fullsize {
 }
 
 .vine-container {
+  border: 5px solid red;
   z-index: -2;
-  transform: perspective(30em) rotateX(60deg);
+  transform: perspective(70em) rotateX(85deg) translateZ(-230px);
   canvas {
     position: fixed;
     top: 50%;

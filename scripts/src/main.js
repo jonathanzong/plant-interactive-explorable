@@ -39,29 +39,13 @@ $(document).ready(function() {
 
 
   /***** vine things *****/
-  var container = $(".vine-container").get(0);
+  var container = $('.vine-container').get(0);
   var vineStates = {};
-  var vine = {};
   var tweenState = {};
-  var initialized = {};
-
-  // setup renderer
-  var renderer = PIXI.autoDetectRenderer(
-    1200,
-    700,
-    { transparent: true });
-
-  $(container).append(renderer.view);
 
   function initializeVine(sceneID){
 
-    if(initialized[sceneID]) return;
-
-    vine[sceneID] = new VineScene({
-      renderer: renderer,
-      container: container,
-      pointCount: 200
-    });
+    if(vineStates[sceneID]) return;
 
     vineStates[sceneID] = [];
     $('.vine-path-scene'+sceneID).each(function(i, elem) {
@@ -69,14 +53,11 @@ $(document).ready(function() {
       var pathLength = Snap.path.getTotalLength(path);
 
       vineStates[sceneID].push({
-        path: path,
+        path: elem,
         pathLength: pathLength,
       });
-
-      vine[sceneID].addVine();
     });
 
-    initialized[sceneID] = true;
     tweenState[sceneID] = { time: 0 };
   }
 
@@ -90,23 +71,25 @@ $(document).ready(function() {
 
   $('.js-vine-trigger').each(function(i, d) {
 
-    var scene_id = $(d).data('scene');
-    var scene_duration = $(d).data('time');
+    var sceneID = $(d).data('scene');
+    // var scene_duration = $(d).data('time');
 
-    initializeVine(scene_id);
+    initializeVine(sceneID);
 
     new ScrollMagic.Scene({
         triggerElement: d,
         triggerHook: 'onEnter',
         duration: getDuration
       })
-      .setTween(tweenState[scene_id], {time: scene_duration})
+      .setTween(tweenState[sceneID], {time: 1})
       .on('enter', function() {
         $(container).addClass('active')
+        $(container).children().removeClass('active');
+        $('[class$="'+sceneID+'"]').addClass('active');
         updateDuration();
       })
       .on('progress', function(){
-        onUpdate(scene_id);
+        onUpdate(sceneID);
       })
       /*.setClassToggle(container, 'active')*/
       .addTo(controller);
@@ -124,6 +107,7 @@ $(document).ready(function() {
       })
       .on('enter', function() {
         $(container).toggleClass('active');
+        $(container).children().removeClass('active');
       })
       .addTo(controller);
   });
@@ -131,36 +115,20 @@ $(document).ready(function() {
   function onUpdate(sceneID) {
     if (!$(container).hasClass('active')) return;
 
+    var tween = tweenState[sceneID];
+
     for (var i = 0; i < vineStates[sceneID].length; i++) {
       var state = vineStates[sceneID][i];
-      vine[sceneID].updatePoints(i, function(points) {
-        for (var i = 0; i < vine[sceneID].pointCount; i++) {
-          var pos = (i / vine[sceneID].pointCount) * state.pathLength * tweenState[sceneID].time ;
-          if (pos < state.pathLength) {
-            var point = state.path.getPointAtLength(pos);
-            points[i].x = point.x/0.5;
-            points[i].y = point.y/0.5;
-          }
-        }
-      });
+      state.path.style.strokeDasharray = [state.pathLength * tween.time, state.pathLength].join(' ');
     }
 
-    vine[sceneID].render();
-  }
-
-
-
-  function trace(elem) {  
-    var state = {
-      length: 0,
-      pathLength: elem.getTotalLength()
-    };
-
-    function drawStroke() {
-      elem.style.strokeDasharray = [state.length, state.pathLength].join(' ');
-    }
-
-    TweenMax.to(state, 3, {length: state.pathLength, onUpdate: drawStroke, ease: Linear.easeNone });
+    TweenLite.set($('.leaf-scene'+sceneID), {
+      x: 500,
+      y: 500,
+      scaleX: tween.time * 2,
+      scaleY: tween.time * 2,
+      // rotation: Math.random() * 180 - 180,
+    });
   }
 
 });

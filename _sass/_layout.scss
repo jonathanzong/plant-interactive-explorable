@@ -9,12 +9,26 @@ html, body, main, section, .container-fluid, .background-cover, %fullsize {
 .vine-container {
   border: 5px solid red;
   z-index: -2;
-  transform: perspective(70em) rotateX(85deg) translateZ(-230px);
+  transform: perspective(70em) rotateX(85deg) translateZ(-270px);
   canvas {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+  path {
+    visibility: hidden;
+  }
+  path.active {
+    visibility: visible;
+    fill-opacity: 0;
+    stroke: #0f0;
+    stroke-width: 15;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  path.leaf.active {
+    fill: #0f0;
   }
 }
 

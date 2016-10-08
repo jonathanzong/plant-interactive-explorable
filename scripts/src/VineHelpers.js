@@ -50,10 +50,10 @@ var VineScene = function(opts) {
 
   function updatePoints(i, fun) {
     fun(vines[i].points);
-    for (var j = 0; j < vines[i].points2.length; j++) {
-      vines[i].points2[j].x = vines[i].points[j].x + 5;
-      vines[i].points2[j].y = vines[i].points[j].y + 5;
-    };
+    // for (var j = 0; j < vines[i].points2.length; j++) {
+    //   vines[i].points2[j].x = vines[i].points[j].x + 5;
+    //   vines[i].points2[j].y = vines[i].points[j].y + 5;
+    // };
   }
 
 

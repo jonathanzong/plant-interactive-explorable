@@ -30,7 +30,11 @@ layout: default
 <div class="layer layer--overlay middleground js-layer js-layer--6" style="background-image: url(images/6-mg.png)"></div>
 <div class="layer layer--overlay foreground js-layer js-layer--6" style="background-image: url(images/6-fg.png)"></div>
 
-<div class="layer layer--overlay vine-container"></div>
+<div class="layer layer--overlay vine-container">
+  <svg viewBox="0 0 1200 700">
+    {% include _vine_paths.html %}
+  </svg>
+</div>
 
 <div class="layer layer--content">
   <div class="container-fluid">
@@ -289,5 +293,3 @@ layout: default
 
   </div>
 </div>
-
-{% include _vine_paths.html %}

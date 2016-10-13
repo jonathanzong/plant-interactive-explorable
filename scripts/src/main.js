@@ -117,18 +117,39 @@ $(document).ready(function() {
 
     var tween = tweenState[sceneID];
 
+    // loop over all vines in scene
     for (var i = 0; i < vineStates[sceneID].length; i++) {
       var state = vineStates[sceneID][i];
+      // setting the length of the vine
       state.path.style.strokeDasharray = [state.pathLength * tween.time, state.pathLength].join(' ');
+      
+      // leaf stuff
+      var numLeaves = $('.leaf-scene'+sceneID).length;
+      var step = 1 / numLeaves;
+      $('.leaf-scene'+sceneID).each(function(i, d) {
+        if (tween.time > step * i) {
+          var point = state.path.getPointAtLength(state.pathLength * step * i);
+          var point2 = state.path.getPointAtLength(state.pathLength * step * i - 1);
+          TweenLite.set(d, {
+            x: point.x,
+            y: point.y,
+            scaleX: tween.time * 6 + 3,
+            scaleY: tween.time * 6 + 3,
+            // scaleX: 1,
+            // scaleY: 1,
+            rotation: (i % 2 == 0 ? 1 : -1) * 60 + Math.atan2(point.y - point2.y, point.x - point2.x) * 180 / Math.PI,
+            fill: `rgb(0, ${(110 + 50 * step * i)}, 0)`
+          });
+        } else {
+          TweenLite.set(d, {
+            scaleX: 0,
+            scaleY: 0,
+          });
+        }
+      });
     }
 
-    TweenLite.set($('.leaf-scene'+sceneID), {
-      x: 500,
-      y: 500,
-      scaleX: tween.time * 2,
-      scaleY: tween.time * 2,
-      // rotation: Math.random() * 180 - 180,
-    });
+    
   }
 
 });

@@ -19,16 +19,19 @@ html, body, main, section, .container-fluid, .background-cover, %fullsize {
   path {
     visibility: hidden;
   }
-  path.active {
+  // todo
+  path:not(.leaf).active {
     visibility: visible;
     fill-opacity: 0;
-    stroke: #0f0;
-    stroke-width: 15;
+    stroke: #00b000;
+    stroke-width: 13px;
     stroke-linecap: round;
     stroke-linejoin: round;
   }
   path.leaf.active {
-    fill: #0f0;
+    transform-origin: 0% 100%;
+    visibility: visible;
+    //fill: #0f0;
   }
 }
 

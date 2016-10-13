@@ -72,7 +72,7 @@ $(document).ready(function() {
   $('.js-vine-trigger').each(function(i, d) {
 
     var sceneID = $(d).data('scene');
-    // var scene_duration = $(d).data('time');
+    var scene_duration = $(d).data('time');
 
     initializeVine(sceneID);
 
@@ -81,7 +81,7 @@ $(document).ready(function() {
         triggerHook: 'onEnter',
         duration: getDuration
       })
-      .setTween(tweenState[sceneID], {time: 1})
+      .setTween(tweenState[sceneID], {time: scene_duration})
       .on('enter', function() {
         $(container).addClass('active')
         $(container).children().removeClass('active');

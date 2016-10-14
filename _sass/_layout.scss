@@ -16,6 +16,7 @@ html, body, main, section, .container-fluid, .background-cover, %fullsize {
     left: 50%;
     transform: translate(-50%, -50%);
   }
+
   path {
     visibility: hidden;
   }
@@ -33,6 +34,7 @@ html, body, main, section, .container-fluid, .background-cover, %fullsize {
     visibility: visible;
     //fill: #0f0;
   }
+
 }
 
 section {

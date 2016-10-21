@@ -39,6 +39,7 @@ $(document).ready(function() {
 
 
   /***** vine things *****/
+  var vineContainer = $('.vine-container').get(0);
   var vineStates = {};
   var tweenState = {};
 
@@ -107,16 +108,15 @@ $(document).ready(function() {
       })
       .setTween(tweenState[sceneID], {time: scene_duration})
       .on('enter', function() {
-        $(container).addClass('active');
+        $(vineContainer).addClass('active');
         
-        $(container).removeClass(function(i, classes) {
+        $(vineContainer).removeClass(function(i, classes) {
           // remove classes prefixed by 'scene'
           var matches = classes.match(/\bscene\S+/ig);
           return (matches) ? matches.join(' ') : '';
         });
-        $(container).addClass('scene'+sceneID);
+        $(vineContainer).addClass('scene'+sceneID);
 
-        $(container).children().removeClass('active');
         $('.vine-scene'+sceneID).addClass('active');
 
         updateDuration();
@@ -140,15 +140,15 @@ $(document).ready(function() {
         duration: 0.1
       })
       .on('enter', function() {
-        $('.vine-container').toggleClass('active');
+        $(vineContainer).toggleClass('active');
 
         // when leaving a scene, remember to set lengths of objects to zero
         for (var i = 0; i < vineStates[sceneID].length; i++) {
           var state = vineStates[sceneID][i];
-          state.path.style.strokeDasharray = [0, state.pathLength].join(' ');
+          state.elem.style.strokeDasharray = [0, state.pathLength].join(' ');
         }
 
-        $('.leaf-scene'+sceneID).each(function(i, d) {
+        $('.vine-scene'+sceneID+' .leaf').each(function(i, d) {
           TweenLite.set(d, {
             scaleX: 0,
             scaleY: 0,
@@ -160,7 +160,7 @@ $(document).ready(function() {
   });
 
   function onUpdate(sceneID) {
-    if (!$('.vine-container').hasClass('active')) return;
+    if (!$(vineContainer).hasClass('active')) return;
 
     var tween = tweenState[sceneID];
 
@@ -171,16 +171,16 @@ $(document).ready(function() {
       vineState.elem.style.strokeDasharray = [vineState.pathLength * tween.time, vineState.pathLength].join(' ');
 
       // PATH TWEEN EXPERIMENTS
-      TweenMax.fromTo(vineState.elem, 3, {
-        attr: {d: $(vineState.elem).data('d')}
-      }, {
-        attr: {d: $(vineState.elem).data('d2')},
-        onComplete: function(o) {
-          o.style.strokeDasharray = [vineState.pathLength * tween.time, vineState.pathLength].join(' ');
-        },
-        yoyo:true,
-        repeat: -1
-      });
+      // TweenMax.fromTo(vineState.elem, 3, {
+      //   attr: {d: $(vineState.elem).data('d')}
+      // }, {
+      //   attr: {d: $(vineState.elem).data('d2')},
+      //   onComplete: function(o) {
+      //     o.style.strokeDasharray = [vineState.pathLength * tween.time, vineState.pathLength].join(' ');
+      //   },
+      //   yoyo:true,
+      //   repeat: -1
+      // });
 
       // loop over all leaves of a vine
       for (var j = 0; j < vineState.leaves.length; j++) {

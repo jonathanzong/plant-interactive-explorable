@@ -1,6 +1,7 @@
 html, body, main, section, .container-fluid, .background-cover, %fullsize {
   height: 100%;
   width: 100%;
+  overflow-x: hidden;
   padding: 0;
   margin: 0;
   z-index: 0;
@@ -9,7 +10,9 @@ html, body, main, section, .container-fluid, .background-cover, %fullsize {
 .vine-container {
   border: 5px solid red;
   z-index: -2;
-  transform: perspective(70em) rotateX(85deg) translateZ(-270px);
+  &.scene2 {
+    transform: perspective(70em) rotateX(85deg) translateZ(-270px) scale(0.8);
+  }
   canvas {
     position: fixed;
     top: 50%;
@@ -20,7 +23,7 @@ html, body, main, section, .container-fluid, .background-cover, %fullsize {
     visibility: hidden;
   }
   // todo
-  .active path:not(.leaf) {
+  g.active path:not(.leaf) {
     visibility: visible;
     fill-opacity: 0;
     stroke: #42bd2c;
@@ -28,7 +31,7 @@ html, body, main, section, .container-fluid, .background-cover, %fullsize {
     stroke-linecap: round;
     stroke-linejoin: round;
   }
-  .active path.leaf {
+  g.active path.leaf {
     transform-origin: 0% 100%;
     visibility: visible;
     //fill: #0f0;

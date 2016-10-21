@@ -68,7 +68,6 @@ $(document).ready(function() {
             fill: `rgb(0, ${Math.random() * 100 + 110}, 0)`
           };
           leaves.push(leafState);
-          console.log(leafState.elem)
           TweenLite.set(leaf, {
             x: leafState.x,
             y: leafState.y,
@@ -110,6 +109,11 @@ $(document).ready(function() {
       .setTween(tweenState[sceneID], {time: scene_duration})
       .on('enter', function() {
         $(container).addClass('active')
+        $(container).removeClass(function(index, classes){
+          var matches = classes.match(/\bscene\S+/ig);
+          return (matches) ? matches.join(' ') : '';
+        });
+        $(container).addClass('scene'+sceneID);
         $(container).children().removeClass('active');
         $('.vine-scene'+sceneID).addClass('active');
         updateDuration();

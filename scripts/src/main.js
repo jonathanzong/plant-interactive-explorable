@@ -39,7 +39,6 @@ $(document).ready(function() {
 
 
   /***** vine things *****/
-  var container = $('.vine-container').get(0);
   var vineStates = {};
   var tweenState = {};
 
@@ -125,7 +124,6 @@ $(document).ready(function() {
       .on('progress', function(){
         onUpdate(sceneID);
       })
-      /*.setClassToggle(container, 'active')*/
       .addTo(controller);
  });
 
@@ -134,20 +132,35 @@ $(document).ready(function() {
   // so if you scroll up, it shows you the previous vine scene
   $('.js-vine-kill').each(function(i, d) {
 
+    var sceneID = $(d).data('scene');
+
     new ScrollMagic.Scene({
         triggerElement: d,
         triggerHook: 'onCenter',
         duration: 0.1
       })
       .on('enter', function() {
-        $(container).toggleClass('active');
-        $(container).children().removeClass('active');
+        $('.vine-container').toggleClass('active');
+
+        // when leaving a scene, remember to set lengths of objects to zero
+        for (var i = 0; i < vineStates[sceneID].length; i++) {
+          var state = vineStates[sceneID][i];
+          state.path.style.strokeDasharray = [0, state.pathLength].join(' ');
+        }
+
+        $('.leaf-scene'+sceneID).each(function(i, d) {
+          TweenLite.set(d, {
+            scaleX: 0,
+            scaleY: 0,
+          });
+        });
+
       })
       .addTo(controller);
   });
 
   function onUpdate(sceneID) {
-    if (!$(container).hasClass('active')) return;
+    if (!$('.vine-container').hasClass('active')) return;
 
     var tween = tweenState[sceneID];
 
@@ -185,7 +198,6 @@ $(document).ready(function() {
         }
       }
     }
-    
   }
 
 });

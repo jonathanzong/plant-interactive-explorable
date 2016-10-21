@@ -158,7 +158,7 @@ $(document).ready(function() {
       vineState.elem.style.strokeDasharray = [vineState.pathLength * tween.time, vineState.pathLength].join(' ');
 
       // PATH TWEEN EXPERIMENTS
-      TweenMax.fromTo(vineState.elem, 1, {
+      TweenMax.fromTo(vineState.elem, 3, {
         attr: {d: $(vineState.elem).data('d')}
       }, {
         attr: {d: $(vineState.elem).data('d2')},

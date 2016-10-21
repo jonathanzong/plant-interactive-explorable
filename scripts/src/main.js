@@ -43,18 +43,44 @@ $(document).ready(function() {
   var vineStates = {};
   var tweenState = {};
 
-  function initializeVine(sceneID){
+  function initializeScene(sceneID){
 
     if(vineStates[sceneID]) return;
 
     vineStates[sceneID] = [];
-    $('.vine-path-scene'+sceneID).each(function(i, elem) {
-      var path = Snap(elem);
-      var pathLength = Snap.path.getTotalLength(path);
-
-      vineStates[sceneID].push({
-        path: elem,
-        pathLength: pathLength,
+    $('.vine-scene'+sceneID).each(function(i, scene) {
+      $(scene).children('.vine-path').each(function(i, vine) {
+        var path = Snap(vine);
+        var pathLength = Snap.path.getTotalLength(path);
+        var leaves = [];
+        $(scene).children('.leaf').each(function(i, leaf) {
+          var t = $(leaf).data('time') || 1;
+          var point = vine.getPointAtLength(pathLength * t);
+          var point2 = vine.getPointAtLength(pathLength * t);
+          var leafState = {
+            elem: leaf,
+            x: point.x,
+            y: point.y,
+            t: t,
+            scaleX: 0,
+            scaleY: 0,
+            rotation: (i % 2 == 0 ? 1 : -1) * 60 + Math.atan2(point.y - point2.y, point.x - point2.x) * 180 / Math.PI,
+            fill: `rgb(0, ${Math.random() * 100 + 110}, 0)`
+          };
+          leaves.push(leafState);
+          console.log(leafState.elem)
+          TweenLite.set(leaf, {
+            x: leafState.x,
+            y: leafState.y,
+            rotation: leafState.rotation,
+            fill: leafState.fill
+          });
+        });
+        vineStates[sceneID].push({
+          elem: vine,
+          pathLength: pathLength,
+          leaves: leaves
+        });
       });
     });
 
@@ -74,7 +100,7 @@ $(document).ready(function() {
     var sceneID = $(d).data('scene');
     var scene_duration = $(d).data('time');
 
-    initializeVine(sceneID);
+    initializeScene(sceneID);
 
     new ScrollMagic.Scene({
         triggerElement: d,
@@ -85,7 +111,7 @@ $(document).ready(function() {
       .on('enter', function() {
         $(container).addClass('active')
         $(container).children().removeClass('active');
-        $('[class$="'+sceneID+'"]').addClass('active');
+        $('.vine-scene'+sceneID).addClass('active');
         updateDuration();
       })
       .on('progress', function(){
@@ -119,36 +145,25 @@ $(document).ready(function() {
 
     // loop over all vines in scene
     for (var i = 0; i < vineStates[sceneID].length; i++) {
-      var state = vineStates[sceneID][i];
+      var vineState = vineStates[sceneID][i];
       // setting the length of the vine
-      state.path.style.strokeDasharray = [state.pathLength * tween.time, state.pathLength].join(' ');
-      
-      // leaf stuff
-      var numLeaves = $('.leaf-scene'+sceneID).length;
-      var step = 1 / numLeaves;
-      $('.leaf-scene'+sceneID).each(function(i, d) {
-        if (tween.time > step * i) {
-          var point = state.path.getPointAtLength(state.pathLength * step * i);
-          var point2 = state.path.getPointAtLength(state.pathLength * step * i - 1);
-          TweenLite.set(d, {
-            x: point.x,
-            y: point.y,
-            scaleX: tween.time * 6 + 3,
-            scaleY: tween.time * 6 + 3,
-            // scaleX: 1,
-            // scaleY: 1,
-            rotation: (i % 2 == 0 ? 1 : -1) * 60 + Math.atan2(point.y - point2.y, point.x - point2.x) * 180 / Math.PI,
-            fill: `rgb(0, ${(110 + 50 * step * i)}, 0)`
+      vineState.elem.style.strokeDasharray = [vineState.pathLength * tween.time, vineState.pathLength].join(' ');
+      // loop over all leaves of a vine
+      for (var j = 0; j < vineState.leaves.length; j++) {
+        var leafState = vineState.leaves[j];
+        if (tween.time > leafState.t) {
+          TweenLite.set(leafState.elem, {
+            scaleX: tween.time * 3 + 3,
+            scaleY: tween.time * 3 + 3,
           });
         } else {
-          TweenLite.set(d, {
+          TweenLite.set(leafState.elem, {
             scaleX: 0,
             scaleY: 0,
           });
         }
-      });
+      }
     }
-
     
   }
 

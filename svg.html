@@ -52,8 +52,10 @@ function onMouseUp(event) {
   var difference = segmentCount - newSegmentCount;
   var percentage = 100 - Math.round(newSegmentCount / segmentCount * 100);
   textItem.content = difference + ' of the ' + segmentCount + ' segments were removed. Saving ' + percentage + '%';
-  
-  document.getElementById("output").textContent = path.pathData;
+
+  var iDiv = document.createElement('div');
+  iDiv.textContent = path.pathData;
+  document.getElementById("output").appendChild(iDiv);
 }
 </script>
 

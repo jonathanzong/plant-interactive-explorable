@@ -47,6 +47,9 @@ html, body, main, section, .container-fluid, .background-cover, %fullsize {
   &.scene2 {
     transform: perspective(70em) rotateX(85deg) translateZ(-270px) scale(0.8);
   }
+  &.scene5 {
+    transform: translateX(30px);
+  }
 }
 
 section {

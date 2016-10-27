@@ -117,6 +117,7 @@ $(document).ready(function() {
         });
         $(vineContainer).addClass('scene'+sceneID);
 
+        $('g').removeClass('active');
         $('.vine-scene'+sceneID).addClass('active');
 
         updateDuration();

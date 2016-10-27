@@ -49,6 +49,7 @@ $(document).ready(function() {
 
     vineStates[sceneID] = [];
     $('.vine-scene'+sceneID).each(function(i, scene) {
+      var leafscale = $(scene).data('leafscale') || 1;
       $(scene).children('.vine-path').each(function(i, vine) {
         var path = Snap(vine);
         var pathLength = Snap.path.getTotalLength(path);
@@ -62,8 +63,7 @@ $(document).ready(function() {
             x: point.x,
             y: point.y,
             t: t,
-            scaleX: 0,
-            scaleY: 0,
+            scale: leafscale,
             rotation: (i % 2 == 0 ? 1 : -1) * 60 + Math.atan2(point.y - point2.y, point.x - point2.x) * 180 / Math.PI,
             fill: `rgb(0, ${Math.random() * 100 + 110}, 0)`
           };
@@ -188,8 +188,8 @@ $(document).ready(function() {
         var leafState = vineState.leaves[j];
         if (tween.time > leafState.t) {
           TweenLite.set(leafState.elem, {
-            scaleX: (tween.time * 3 + 3)*scale,
-            scaleY: (tween.time * 3 + 3)*scale,
+            scaleX: (tween.time * 3 + 3) * leafState.scale,
+            scaleY: (tween.time * 3 + 3) * leafState.scale
           });
         } else {
           TweenLite.set(leafState.elem, {

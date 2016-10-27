@@ -54,7 +54,7 @@ function onMouseUp(event) {
   textItem.content = difference + ' of the ' + segmentCount + ' segments were removed. Saving ' + percentage + '%';
 
   var iDiv = document.createElement('div');
-  iDiv.textContent = path.pathData;
+  iDiv.textContent = '<path class="vine-path" d="' + path.pathData + '"/>';
   document.getElementById("output").appendChild(iDiv);
 }
 </script>

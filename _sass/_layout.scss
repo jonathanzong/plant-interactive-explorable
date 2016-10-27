@@ -14,9 +14,14 @@ html, body, main, section, .container-fluid, .background-cover, %fullsize {
     transform: perspective(70em) rotateX(85deg) translateZ(-270px) scale(0.8);
   }
   svg {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
     min-width: 1200px;
     min-height: 700px;
-    object-fit: cover;
   }
 
   path {

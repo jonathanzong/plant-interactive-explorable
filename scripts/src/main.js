@@ -109,7 +109,7 @@ $(document).ready(function() {
       .setTween(tweenState[sceneID], {time: scene_duration})
       .on('enter', function() {
         $(vineContainer).addClass('active');
-        
+
         $(vineContainer).removeClass(function(i, classes) {
           // remove classes prefixed by 'scene'
           var matches = classes.match(/\bscene\S+/ig);
@@ -182,13 +182,14 @@ $(document).ready(function() {
       //   repeat: -1
       // });
 
+      var scale = 0.3;
       // loop over all leaves of a vine
       for (var j = 0; j < vineState.leaves.length; j++) {
         var leafState = vineState.leaves[j];
         if (tween.time > leafState.t) {
           TweenLite.set(leafState.elem, {
-            scaleX: tween.time * 3 + 3,
-            scaleY: tween.time * 3 + 3,
+            scaleX: (tween.time * 3 + 3)*scale,
+            scaleY: (tween.time * 3 + 3)*scale,
           });
         } else {
           TweenLite.set(leafState.elem, {

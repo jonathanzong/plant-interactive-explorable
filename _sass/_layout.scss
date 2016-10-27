@@ -10,9 +10,6 @@ html, body, main, section, .container-fluid, .background-cover, %fullsize {
 .vine-container {
   border: 5px solid red;
   z-index: -2;
-  &.scene2 {
-    transform: perspective(70em) rotateX(85deg) translateZ(-270px) scale(0.8);
-  }
   svg {
     position: fixed;
     top: 50%;
@@ -32,7 +29,7 @@ html, body, main, section, .container-fluid, .background-cover, %fullsize {
     visibility: visible;
     fill-opacity: 0;
     stroke: #42bd2c;
-    stroke-width: 13px;
+    stroke-width: 10px;
     stroke-linecap: round;
     stroke-linejoin: round;
   }
@@ -41,7 +38,15 @@ html, body, main, section, .container-fluid, .background-cover, %fullsize {
     visibility: visible;
     //fill: #0f0;
   }
-
+  &.scene1 {
+  //  transform: perspective(70em) rotateX(50deg) scale(1.2);
+    path:not(.leaf) {
+      stroke-width: 5px !important;
+    }
+  }
+  &.scene2 {
+    transform: perspective(70em) rotateX(85deg) translateZ(-270px) scale(0.8);
+  }
 }
 
 section {

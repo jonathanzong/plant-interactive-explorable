@@ -13,11 +13,10 @@ html, body, main, section, .container-fluid, .background-cover, %fullsize {
   &.scene2 {
     transform: perspective(70em) rotateX(85deg) translateZ(-270px) scale(0.8);
   }
-  canvas {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  svg {
+    min-width: 1200px;
+    min-height: 700px;
+    object-fit: cover;
   }
 
   path {

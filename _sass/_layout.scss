@@ -34,7 +34,6 @@ html, body, main, section, .container-fluid, .background-cover, %fullsize {
     stroke-linejoin: round;
   }
   g.active path.leaf {
-    transform-origin: 0% 100%;
     visibility: visible;
     //fill: #0f0;
   }

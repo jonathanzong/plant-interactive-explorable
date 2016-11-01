@@ -55,9 +55,9 @@ $(document).ready(function() {
         var pathLength = Snap.path.getTotalLength(path);
         var leaves = [];
         $(scene).children('.leaf').each(function(i, leaf) {
-          var t = $(leaf).data('time') || 1;
+          var t = $(leaf).data('time') || 0;
           var point = vine.getPointAtLength(pathLength * t);
-          var point2 = vine.getPointAtLength(pathLength * t);
+          var point2 = vine.getPointAtLength(pathLength * t * 0.99);
           var leafState = {
             elem: leaf,
             x: point.x,
@@ -72,6 +72,7 @@ $(document).ready(function() {
             x: leafState.x,
             y: leafState.y,
             rotation: leafState.rotation,
+            svgOrigin: "0 0",
             fill: leafState.fill
           });
         });
@@ -183,7 +184,6 @@ $(document).ready(function() {
       //   repeat: -1
       // });
 
-      var scale = 0.3;
       // loop over all leaves of a vine
       for (var j = 0; j < vineState.leaves.length; j++) {
         var leafState = vineState.leaves[j];

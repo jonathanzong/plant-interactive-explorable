@@ -173,16 +173,19 @@ $(document).ready(function() {
       vineState.elem.style.strokeDasharray = [vineState.pathLength * tween.time, vineState.pathLength].join(' ');
 
       // PATH TWEEN EXPERIMENTS
-      // TweenMax.fromTo(vineState.elem, 3, {
-      //   attr: {d: $(vineState.elem).data('d')}
-      // }, {
-      //   attr: {d: $(vineState.elem).data('d2')},
-      //   onComplete: function(o) {
-      //     o.style.strokeDasharray = [vineState.pathLength * tween.time, vineState.pathLength].join(' ');
-      //   },
-      //   yoyo:true,
-      //   repeat: -1
-      // });
+      if ($(vineState.elem).data('d2')) {
+        TweenMax.fromTo(vineState.elem, 3, {
+          attr: {d: $(vineState.elem).data('d')}
+        }, {
+          attr: {d: $(vineState.elem).data('d2')},
+          onComplete: function(o) {
+            o.style.strokeDasharray = [vineState.pathLength * tween.time, vineState.pathLength].join(' ');
+          },
+          ease: Linear.easeInOut,
+          yoyo:true,
+          repeat: -1
+        });
+      }
 
       // loop over all leaves of a vine
       for (var j = 0; j < vineState.leaves.length; j++) {
